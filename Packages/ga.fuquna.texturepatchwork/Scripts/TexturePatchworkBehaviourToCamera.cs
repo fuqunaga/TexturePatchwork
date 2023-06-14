@@ -16,31 +16,32 @@ namespace TexturePatchwork
 
         public Material material;
 
-        private TexturePatchworkBehaviour _rectArrange;
+        private TexturePatchworkBehaviour _patchworkBehaviour;
         private Camera _camera;
         private int _lastCullingMask;
         private CameraClearFlags _lastClearFlag;
 
         
-        private void OnEnable()
-        {
-            material.SetFloat(ShaderParam.Enable, 1f);
-        }
-        
         private void OnDisable()
         {
+            if (_camera != null && _lastCullingMask != 0)
+            {
+                _camera.cullingMask = _lastCullingMask;
+                _camera.clearFlags = _lastClearFlag;
+            }
+
             material.SetFloat(ShaderParam.Enable, 0f);
         }
 
         private void Start()
         {
             _camera = GetComponent<Camera>();
-            _rectArrange = GetComponent<TexturePatchworkBehaviour>();
+            _patchworkBehaviour = GetComponent<TexturePatchworkBehaviour>();
         }
 
         private void Update()
         {
-            var enable = _rectArrange.isActiveAndEnabled && _rectArrange.IsValid;
+            var enable = _patchworkBehaviour.isActiveAndEnabled && _patchworkBehaviour.IsValid;
 
             var isCameraEnable = _camera.cullingMask != 0;
             var change = (enable == isCameraEnable);
@@ -53,7 +54,7 @@ namespace TexturePatchwork
                     _camera.cullingMask = 0;
                     _camera.clearFlags = CameraClearFlags.Nothing;
 
-                    material.SetTexture(ShaderParam.Texture, _rectArrange.Texture);
+                    material.SetTexture(ShaderParam.Texture, _patchworkBehaviour.Texture);
                 }
                 else
                 {
