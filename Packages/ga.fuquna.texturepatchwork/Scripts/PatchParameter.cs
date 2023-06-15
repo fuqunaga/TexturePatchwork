@@ -7,7 +7,7 @@ namespace TexturePatchwork
     public class PatchParameter
     {
         public Texture readTexture;
-        public RotatedRect readRectUv;
-        public RotatedRect writeRectUv;
+        public Quad readUV = new();
+        public Quad writeUV = new();
     }
 }

@@ -41,17 +41,17 @@ namespace TexturePatchwork
                 mat.mainTexture = patchParameter.readTexture;
                 mat.SetPass(0);
 
-                var readRectUv = patchParameter.readRectUv;
-                var readLeftBottom = readRectUv.LeftBottom;
-                var readLeftTop = readRectUv.LeftTop;
-                var readRightTop = readRectUv.RightTop;
-                var readRightBottom = readRectUv.RightBottom;
+                var readUV = patchParameter.readUV;
+                var readLeftBottom = readUV.leftBottom;
+                var readLeftTop = readUV.leftTop;
+                var readRightTop = readUV.rightTop;
+                var readRightBottom = readUV.rightBottom;
 
-                var writeRectUv = patchParameter.writeRectUv;
-                var writeLeftBottom = writeRectUv.LeftBottom;
-                var writeLeftTop = writeRectUv.LeftTop;
-                var writeRightTop = writeRectUv.RightTop;
-                var writeRightBottom = writeRectUv.RightBottom;
+                var writeUV = patchParameter.writeUV;
+                var writeLeftBottom = writeUV.leftBottom;
+                var writeLeftTop = writeUV.leftTop;
+                var writeRightTop = writeUV.rightTop;
+                var writeRightBottom = writeUV.rightBottom;
 
                 GL.Begin(GL.QUADS);
 
