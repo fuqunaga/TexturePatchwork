@@ -20,9 +20,9 @@ namespace TexturePatchwork
             set => _material = value;
         }
 
-        public static void Render(RenderTexture targetTex, List<PatchParameter> patchParameters, Color? clearColor = null, BlendMode dstBlendMode = BlendMode.Zero)
+        public static void Render(RenderTexture targetTex, IEnumerable<PatchParameter> patchParameters, Color? clearColor = null, BlendMode dstBlendMode = BlendMode.Zero)
         {
-            if (patchParameters == null || !patchParameters.Any()) return;
+            if (patchParameters == null ) return;
             
             var mat = Material;
             mat.SetInt(ShaderParam.DstFactor, (int)dstBlendMode);
@@ -36,34 +36,39 @@ namespace TexturePatchwork
             GL.PushMatrix();
             GL.LoadOrtho();
 
-            patchParameters.ForEach(refTex =>
+            foreach(var patchParameter in patchParameters)
             {
-                mat.mainTexture = refTex.tex;
+                mat.mainTexture = patchParameter.readTexture;
                 mat.SetPass(0);
 
-                var readLeftBottom = refTex.readLeftBottom;
-                var readLeftTop = refTex.readLeftTop;
-                var readRightTop = refTex.readRightTop;
-                var readRightBottom = refTex.readRightBottom;
+                var readRectUv = patchParameter.readRectUv;
+                var readLeftBottom = readRectUv.LeftBottom;
+                var readLeftTop = readRectUv.LeftTop;
+                var readRightTop = readRectUv.RightTop;
+                var readRightBottom = readRectUv.RightBottom;
 
-                var write = refTex.writeRect;
+                var writeRectUv = patchParameter.writeRectUv;
+                var writeLeftBottom = writeRectUv.LeftBottom;
+                var writeLeftTop = writeRectUv.LeftTop;
+                var writeRightTop = writeRectUv.RightTop;
+                var writeRightBottom = writeRectUv.RightBottom;
 
                 GL.Begin(GL.QUADS);
 
                 GL.TexCoord2(readLeftBottom.x, readLeftBottom.y);
-                GL.Vertex3(write.min.x, write.min.y, 0f);
+                GL.Vertex3(writeLeftBottom.x, writeLeftBottom.y, 0f);
 
                 GL.TexCoord2(readLeftTop.x, readLeftTop.y);
-                GL.Vertex3(write.min.x, write.max.y, 0f);
+                GL.Vertex3(writeLeftTop.x, writeLeftTop.y, 0f);
 
                 GL.TexCoord2(readRightTop.x, readRightTop.y);
-                GL.Vertex3(write.max.x, write.max.y, 0f);
+                GL.Vertex3(writeRightTop.x, writeRightTop.y, 0f);
 
                 GL.TexCoord2(readRightBottom.x, readRightBottom.y);
-                GL.Vertex3(write.max.x, write.min.y, 0f);
+                GL.Vertex3(writeRightBottom.x, writeRightBottom.y, 0f);
 
                 GL.End();
-            });
+            }
 
             GL.PopMatrix();
         }

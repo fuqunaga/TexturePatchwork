@@ -10,10 +10,17 @@ namespace TexturePatchwork
     /// </summary>
     public class TexturePatchworkBehaviour : MonoBehaviour
     {
+        public enum UpdateMode
+        {
+            EveryFrame,
+            Lazy
+        }
+        
         public Color clearColor = Color.black;
         public BlendMode dstBlendMode = BlendMode.Zero;
         public Vector2Int targetTextureSize = new(1920, 1080);
         public List<PatchParameter> patchParameters = new();
+        public UpdateMode updateMode = UpdateMode.EveryFrame;
 
         [Tooltip("For debug preview")] [SerializeField]
         private RenderTexture targetTexture;
@@ -24,29 +31,35 @@ namespace TexturePatchwork
         {
             get
             {
-                UpdateTex();
+                if (_needUpdate)
+                {
+                    UpdateTex();
+                    _needUpdate = false;
+                }
+
                 return targetTexture;
             }
         }
 
-        public bool IsValid => patchParameters.All(rt => rt.tex != null);
+        public bool IsValid => patchParameters.All(rt => rt.readTexture != null);
 
 
         private void Update()
         {
-            _needUpdate = true;
+            if (updateMode == UpdateMode.EveryFrame)
+            {
+                UpdateTex();
+            }
+            else
+            {
+                _needUpdate = true;
+            }
         }
-
 
         private void UpdateTex()
         {
             CheckTex();
-
-            if (_needUpdate)
-            {
-                TexturePatchwork.Render(targetTexture, patchParameters, clearColor, dstBlendMode);
-                _needUpdate = false;
-            }
+            TexturePatchwork.Render(targetTexture, patchParameters, clearColor, dstBlendMode);
         }
 
         private void CheckTex()
