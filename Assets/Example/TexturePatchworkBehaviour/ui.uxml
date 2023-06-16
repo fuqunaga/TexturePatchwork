@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement style="background-color: rgb(93, 93, 93); border-top-left-radius: 5px; border-bottom-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; height: auto; color: rgb(243, 243, 243); flex-direction: row;">
+        <ui:VisualElement name="PatchworkParameterContainer" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); height: auto;">
+            <ui:Label tabindex="-1" text="PatchParameter" display-tooltip-when-elided="true" />
+            <ui:ScrollView name="PatchworkParameterScrollView" />
+        </ui:VisualElement>
+        <ui:VisualElement name="OutputContainer" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+            <ui:Label tabindex="-1" text="Output" display-tooltip-when-elided="true" />
+            <ui:Toggle label="Show quads" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
