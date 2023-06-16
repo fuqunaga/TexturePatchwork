@@ -1,6 +1,8 @@
 # TexturePatchwork
 Cut out any portion of a texture and paste it onto another texture.
 
+![](Documentation~/example.gif)
+
 
 # Installation
 Add the following address to UnityPackageManager.
