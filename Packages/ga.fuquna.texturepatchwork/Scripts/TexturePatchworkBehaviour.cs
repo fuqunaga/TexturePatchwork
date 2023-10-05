@@ -18,6 +18,7 @@ namespace TexturePatchwork
         
         public Color clearColor = Color.black;
         public BlendMode dstBlendMode = BlendMode.Zero;
+        [Tooltip("Textures connect smoothly across polygons.")]
         public bool useHomography = true;
         public Vector2Int targetTextureSize = new(1920, 1080);
         public List<PatchParameter> patchParameters = new();
