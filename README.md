@@ -1,7 +1,7 @@
 # TexturePatchwork
 Cut out any portion of a texture and paste it onto another texture.
 
-![](Documentation~/example.gif)
+https://github.com/fuqunaga/TexturePatchwork/assets/821072/05c79c8d-dcbb-4a06-87ee-68ba7f1d3b8b
 
 
 # Installation
