@@ -51,7 +51,7 @@
 			{
 				Varyings output;
 
-				output.pos = TransformObjectToHClip(input.vertex);
+				output.pos = TransformObjectToHClip(input.vertex.xyz);
 				output.localPos = input.vertex.xy;
 				return output;
 			}
@@ -83,7 +83,7 @@
 			{
 				Varyings output;
 
-				output.pos = TransformObjectToHClip(input.vertex);
+				output.pos = TransformObjectToHClip(input.vertex.xyz);
 				output.uv = input.texcoord;
 				return output;
 			}

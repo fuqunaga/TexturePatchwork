@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -24,6 +25,9 @@ namespace TexturePatchwork
         public List<PatchParameter> patchParameters = new();
         public UpdateMode updateMode = UpdateMode.EveryFrame;
 
+        public int customMaterialPass = -1;
+        public event Action prepareRender;
+        
         [Tooltip("For debug preview")] [SerializeField]
         private RenderTexture targetTexture;
 
@@ -61,7 +65,12 @@ namespace TexturePatchwork
         private void UpdateTex()
         {
             CheckTex();
-            TexturePatchwork.Render(targetTexture, patchParameters, clearColor, dstBlendMode, useHomography);
+            
+            prepareRender?.Invoke();
+            var pass = customMaterialPass >= 0 
+                ? customMaterialPass 
+                : (useHomography ? 0 : 1);
+            TexturePatchwork.Render(targetTexture, patchParameters, clearColor, dstBlendMode, useHomography, pass);
         }
 
         private void CheckTex()

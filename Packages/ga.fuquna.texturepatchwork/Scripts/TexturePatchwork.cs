@@ -21,7 +21,7 @@ namespace TexturePatchwork
             set => _material = value;
         }
 
-        public static void Render(RenderTexture targetTex, IEnumerable<PatchParameter> patchParameters, Color? clearColor = null, BlendMode dstBlendMode = BlendMode.Zero, bool useHomography = true)
+        public static void Render(RenderTexture targetTex, IEnumerable<PatchParameter> patchParameters, Color? clearColor = null, BlendMode dstBlendMode = BlendMode.Zero, bool useHomography = true, int materialPass = 0)
         {
             if (patchParameters == null ) return;
             
@@ -39,17 +39,17 @@ namespace TexturePatchwork
 
             if (useHomography)
             {
-                RenderWithHomography(mat, patchParameters);
+                RenderWithHomography(mat, materialPass, patchParameters);
             }
             else
             {
-                RenderSimple(mat, patchParameters);
+                RenderSimple(mat, materialPass, patchParameters);
             }
         
             GL.PopMatrix();
         }
         
-        private static void RenderWithHomography(Material material, IEnumerable<PatchParameter> patchParameters)
+        private static void RenderWithHomography(Material material, int pass, IEnumerable<PatchParameter> patchParameters)
         {
             foreach (var patchParameter in patchParameters)
             {
@@ -63,7 +63,7 @@ namespace TexturePatchwork
                 material.mainTexture = patchParameter.readTexture;
                 material.SetMatrix(ShaderParam.Homography, CalcHomographyMatrix(writeUV, readUV));
 
-                material.SetPass(0);
+                material.SetPass(pass);
 
                 GL.Begin(GL.QUADS);
 
@@ -76,12 +76,12 @@ namespace TexturePatchwork
             }
         }
 
-        private static void RenderSimple(Material material, IEnumerable<PatchParameter> patchParameters)
+        private static void RenderSimple(Material material, int pass, IEnumerable<PatchParameter> patchParameters)
         {
             foreach (var patchParameter in patchParameters)
             {
                 material.mainTexture = patchParameter.readTexture;
-                material.SetPass(1);
+                material.SetPass(pass);
 
                 var readUV = patchParameter.readUV;
                 var readLeftBottom = readUV.leftBottom;
