@@ -14,13 +14,13 @@ https://github.com/fuqunaga/TexturePatchwork.git?path=/Packages/ga.fuquna.textur
 # How To Use
 
 ### Simply call the method
-```
-TexturePatchwork.Render()
-```
+[`TexturePatchwork.Render()`](https://github.com/fuqunaga/TexturePatchwork/blob/main/Packages/ga.fuquna.texturepatchwork/Scripts/TexturePatchwork.cs#L24)
+
+or
 
 ### Use `TexturePatchworkBehaviour`
 
-1. Attach the `TexturePatchworkBehaviour` Component to GameObeject.
+1. Attach a `TexturePatchworkBehaviour` Component to GameObeject.
 2. Set `TexturePatchworkBehaviour.patchParameters`.
 3. Get the output texture by `patchParameters.Texture`.
 
