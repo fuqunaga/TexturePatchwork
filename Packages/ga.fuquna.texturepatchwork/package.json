@@ -2,7 +2,7 @@
   "name": "ga.fuquna.texturepatchwork",
   "displayName": "TexturePatchwork",
   "version": "0.2.0",
-  "unity": "2022.3",
+  "unity": "6000.2",
   "description": "Cut out any portion of a texture and paste it onto another texture.",
   "author": {
     "name": "fuqunaga"
