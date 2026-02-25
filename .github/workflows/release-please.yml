@@ -12,7 +12,7 @@ on:
       package_folder:
         description: 'Package folder path'
         required: true
-        default: './Packages/com.team-lab.rosettaui'
+        default: './Packages/ga.fuquna.texturepatchwork'
         type: string
 
 
