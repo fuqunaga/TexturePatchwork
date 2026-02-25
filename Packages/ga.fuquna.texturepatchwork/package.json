@@ -6,5 +6,9 @@
   "description": "Cut out any portion of a texture and paste it onto another texture.",
   "author": {
     "name": "fuqunaga"
-  }
+  },
+  "repository": {
+    "url": "https://github.com/fuqunaga/TexturePatchwork"
+  },
+  "license": "MIT"
 }
