@@ -1,10 +1,11 @@
 fileFormatVersion: 2
-guid: aef80b2e8f23e9e4a988883b5acd4b14
+guid: eaf2fe6d53bcd334fa40284930c80417
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - material: {fileID: -876546973899608171, guid: 5f121dbf99490db43b6423c17df96ade,
+  - targetCamera: {instanceID: 0}
+  - material: {fileID: -876546973899608171, guid: 2ee6503c3bc84444eab89d96fe11020e,
       type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
