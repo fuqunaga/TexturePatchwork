@@ -13,7 +13,6 @@ namespace TexturePatchwork.Urp
     ///   そのPassMaterialにmaterialをセットして使うことを想定している
     /// - カメラ自体は他のオブジェクトを描画しないようにする
     /// </summary>
-    [RequireComponent(typeof(TexturePatchworkBehaviour))]
     public class TexturePatchworkBehaviourToCamera : MonoBehaviour
     {
         private static class ShaderParam
@@ -24,16 +23,20 @@ namespace TexturePatchwork.Urp
 
         [SerializeField] private Camera targetCamera;
         [SerializeField] private Material material;
-
-        private TexturePatchworkBehaviour _patchworkBehaviour;
         
         private int _lastCullingMask;
         private CameraClearFlags _lastClearFlag;
 
+        
+        public TexturePatchworkBehaviour PatchworkBehaviour { get; set; }
 
+        
         private void Awake()
         {
-            _patchworkBehaviour = GetComponent<TexturePatchworkBehaviour>();
+            if (PatchworkBehaviour == null)
+            {
+                PatchworkBehaviour = GetComponent<TexturePatchworkBehaviour>();
+            }
         }
 
         private void OnEnable()
@@ -67,7 +70,7 @@ namespace TexturePatchwork.Urp
         private void Update()
         {
             // _patchworkBehaviour.Textureが変わってる場合もあるので毎フレームセット
-            material.SetTexture(ShaderParam.Texture, _patchworkBehaviour.Texture);
+            material.SetTexture(ShaderParam.Texture, PatchworkBehaviour.Texture);
         }
 
         
