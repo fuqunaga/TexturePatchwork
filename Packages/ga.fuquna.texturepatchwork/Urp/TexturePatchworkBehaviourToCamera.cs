@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.Serialization;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -23,19 +24,24 @@ namespace TexturePatchwork.Urp
 
         [SerializeField] private Camera targetCamera;
         [SerializeField] private Material material;
+        [SerializeField] private TexturePatchworkBehaviour patchworkBehaviour;
         
         private int _lastCullingMask;
         private CameraClearFlags _lastClearFlag;
 
-        
-        public TexturePatchworkBehaviour PatchworkBehaviour { get; set; }
+
+        public TexturePatchworkBehaviour PatchworkBehaviour
+        {
+            get => patchworkBehaviour; 
+            set => patchworkBehaviour = value;
+        }
 
         
         private void Awake()
         {
-            if (PatchworkBehaviour == null)
+            if (patchworkBehaviour == null)
             {
-                PatchworkBehaviour = GetComponent<TexturePatchworkBehaviour>();
+                patchworkBehaviour = GetComponent<TexturePatchworkBehaviour>();
             }
         }
 
@@ -70,7 +76,7 @@ namespace TexturePatchwork.Urp
         private void Update()
         {
             // _patchworkBehaviour.Textureが変わってる場合もあるので毎フレームセット
-            material.SetTexture(ShaderParam.Texture, PatchworkBehaviour.Texture);
+            material.SetTexture(ShaderParam.Texture, patchworkBehaviour.Texture);
         }
 
         
