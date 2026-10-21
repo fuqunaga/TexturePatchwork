@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/fuqunaga/TexturePatchwork/compare/ga.fuquna.texturepatchwork-v0.4.0...ga.fuquna.texturepatchwork-v0.4.1) (2026-10-21)
+
+
+### Bug Fixes
+
+* expose TexturePatchworkBehaviourToCamera.PatchworkBehaviour in Inspector for debugging ([4cafe91](https://github.com/fuqunaga/TexturePatchwork/commit/4cafe91531ca2b5495db587350febaabccde951d))
+
 ## [0.4.0](https://github.com/fuqunaga/TexturePatchwork/compare/ga.fuquna.texturepatchwork-v0.3.0...ga.fuquna.texturepatchwork-v0.4.0) (2026-10-16)
 
 
